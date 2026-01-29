@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import type { RootState, AppDispatch } from "../store";
 import { productDetailsRequested, addItem } from "../store/actions";
 import { Preloader } from "../components/Preloader";
+import { Banner } from "../components/Banner";
 
 export const ProductDetailsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -51,6 +52,7 @@ export const ProductDetailsPage = () => {
 
   return (
     <section className="catalog-item">
+      <Banner />
       <h2 className="text-center">{item.title}</h2>
 
       <div className="row">
