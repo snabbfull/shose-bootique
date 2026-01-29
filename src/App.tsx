@@ -7,6 +7,7 @@ import { Footer } from "./components/Footer/Footer";
 import { CatalogPage } from "./pages/CatalogPage";
 import { AboutShop } from "./components/AboutShop/AboutShop";
 import { Contacts } from "./components/Contacts/Contacts";
+import { NotFoundPage } from "./components/404";
 import './App.css'
 
 export const App = () => {
@@ -21,7 +22,7 @@ export const App = () => {
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/about" element={<AboutShop />} />
           <Route path="/contacts" element={<Contacts />} />
-          {/* Можно добавить будущие страницы: /catalog, /about, /contacts */}
+          <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
       </main>
       <Footer />
