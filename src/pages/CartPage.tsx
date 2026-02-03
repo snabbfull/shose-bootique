@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "../store";
+import type { AppDispatch } from "../store";
 import { removeItem, updateItem } from "../store/actions";
 import { Banner } from "../components/Banner";
 import { OrderPage } from "./OrderPage";
+import { selectCartItems, selectCartTotal } from "../store/cart/cartSelectors";
 
 export const CartPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const items = useSelector((state: RootState) => state.cart.items);
+  const items = useSelector(selectCartItems);
 
-  const total = items.reduce((sum, item) => sum + item.price * item.count, 0);
+  const total = useSelector(selectCartTotal);
 
   if (items.length === 0) {
     return (

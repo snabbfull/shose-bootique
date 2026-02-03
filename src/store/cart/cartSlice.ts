@@ -8,12 +8,8 @@ export interface CartState {
 }
 
 const initialState: CartState = {
-  items: JSON.parse(localStorage.getItem("cart") || "[]") as CartItem[],
+  items: [],
 };
-
-const saveCart = (items: CartItem[]) =>
-  localStorage.setItem("cart", JSON.stringify(items));
-
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -31,7 +27,6 @@ export const cartSlice = createSlice({
         } else {
           state.items.push(action.payload);
         }
-        saveCart(state.items);
       })
       .addCase(
         removeItem,
@@ -43,12 +38,10 @@ export const cartSlice = createSlice({
                 item.size === action.payload.size
               ),
           );
-          saveCart(state.items);
         },
       )
       .addCase(clearCart, (state) => {
         state.items = [];
-        localStorage.removeItem("cart");
       })
       .addCase(
         updateItem,
@@ -65,13 +58,11 @@ export const cartSlice = createSlice({
           if (existingItem) {
             existingItem.count = action.payload.count;
           }
-          saveCart(state.items);
         },
       )
       .addCase(orderSucceeded, (state) => {
         // Очищаем корзину после успешного оформления заказа
         state.items = [];
-        localStorage.removeItem("cart");
       });
   },
 });
